@@ -22,6 +22,11 @@ To begin using the Easyfuck interpreter, follow these steps:
     ```powershell
     node easyfuck-interpreter.js
     ```
+    
+    alternatively **Run the Compiler**: Execute the interpreter with Node.js:
+    ```powershell
+    node easyfuck-to-js.js
+    ```
 
 Upon successful setup, a prompt will appear, requesting the path to the Easyfuck file.
 
