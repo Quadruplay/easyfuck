@@ -219,7 +219,7 @@ For precise data manipulation, Easyfuck provides bitwise operations:
 | `{`     | Performs a left logical shift on the value of the cell at the pointer. |
 | `}`     | Performs a right logical shift on the value of the cell at the pointer. |
 | `~`     | Performs a bitwise NOT on the value of the cell at the pointer. |
-| `|`     | Performs a bitwise OR between the value of the cell at the pointer and the value of the storage cell, storing the result in the cell at the pointer. |
+| <code>&#124;</code>     | Performs a bitwise OR between the value of the cell at the pointer and the value of the storage cell, storing the result in the cell at the pointer. |
 | `&`     | Performs a bitwise AND between the value of the cell at the pointer and the value of the storage cell, storing the result in the cell at the pointer. |
 | `^`     | Performs a bitwise XOR between the value of the cell at the pointer and the value of the storage cell, storing the result in the cell at the pointer. |
 | `Y`     | Reverses the order of bits of the value in the cell at the pointer. |
