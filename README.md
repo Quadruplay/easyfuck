@@ -431,3 +431,65 @@ J]
 >>>>>O              #print total sum
 @Give number of dice:
 ```
+
+---
+
+
+### Minifier
+
+The repository comes bundled with another file, `easyfuck-minifier.js`. To run it, simply run this command:
+
+```powershell
+node easyfuck-minifier.js
+```
+
+It will prompt you with the same message as the interpreter, but instead of running the code, it will make it weigh less by removing whitespace, comments, and newlines.
+
+Before:
+
+```
+#Array structure:
+#cell           space character
+#bi-cell        checked number
+#bi-cell        copy of checked number (for checking)
+#bi-cell        copy of checked number (for comparisons)
+#bi-cell        sqrt of checked number (for optimization)
+
+a(<+`X>)i(+`a)  #defining a bi-cell incrementing function i
+b(<->)d(-`b)    #defining a bi-cell decrementing function d
+r(<$>>!<$>>!)   #defining a function r that copies the current bi-cell to the bi-cell to the right and moves the pointer to it
+f(J>>)          #defining a function f that goes back to the first bi-cell
+p(fO<<.>>)      #defining a function p that prints the first bi-cell and a space
+c(<<<$>>^<$>>^) #defining function c that turns a bi-cell to zero if the bi-cell to the left is the same
+
+[.>]J[U]        #printing and clearing memory
+1------.2       #printing new line and setting first cell to a space character
+>>iipip         #printing first 2 primes
+
+l(
+    fiirrrV     #increment number twice (primes other than 2 are odd) and initialize the other bi-cells
+    $<<NM       #divide and multiply 3rd bi-cell by 4th
+    c<$>=       #compare with 2nd to check if 3rd mod 4th is 0, afterwards collapse to single cell
+    -`@0+       #if 0 break, else set to 1
+    frr>>-      #copy 1st to 2nd and 3rd again, then decrement 4th
+    -[+         #if 4th is one, skip while loop
+    $<<NM       #repeat the steps from before
+    c<$>=
+    -`@0+
+    frr>>-
+    -]
+    p           #print the number
+)
+[llfii]        #loop the checking function, incrementing 1st bi-cell twice every second run to target only number of form 6k+1 and 6k+5
+
+#initializer data:
+@Primes:
+```
+(1666 bytes)
+
+After:
+
+```
+a(<+`X>)i(+`a)b(<->)d(-`b)r(<$>>!<$>>!)f(J>>)p(fO<<.>>)c(<<<$>>^<$>>^)[.>]J[U]1------.2>>iipipl(fiirrrV$<<NMc<$>=-`@0+frr>>--[+$<<NMc<$>=-`@0+frr>>--]p)[llfii]@Primes:
+```
+(167 bytes)
