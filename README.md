@@ -24,8 +24,6 @@ To begin using the Easyfuck interpreter, follow these steps:
     ./RUNME.bat
     ```
 
-Upon successful setup, a prompt will appear, requesting the path to the Easyfuck file.
-
 Note: Easyfuck files must use the `.ef` file extension.
 
 ---
