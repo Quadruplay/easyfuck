@@ -8,7 +8,7 @@ To begin using the Easyfuck interpreter, follow these steps:
 
 1. **Clone the Repository**: Start by cloning the Easyfuck repository and navigating into it:
     ```powershell
-    git clone [URL will go here]
+    git clone https://github.com/Quadruplay/easyfuck
     cd easyfuck
     ```
 
@@ -150,7 +150,7 @@ The table below provides a more detailed representation:
 | `57`  |   `▅`     | `9` | `121`|    `♂`    | `y` | `185` |    `⭡`   | `¹` | `249` |    `𓆌`   | `ù`
 | `58`  |   `▆`     | `:` | `122`|    `♃`    | `z` | `186` |    `⭢`   | `º` | `250` |    `𓆉`   | `ú`
 | `59`  |   `▇`     | `;` | `123`|    `♄`    | `{` | `187` |    `⭣`   | `»` | `251` |    `𓆏`   | `û`
-| `60`  |   `█`     | `<` | `124`|    `♅`    | `|` | `188` |    `⭦`   | `¼` | `252` |    `𓆙`   | `ü`
+| `60`  |   `█`     | `<` | `124`|    `♅`    | <code>&#124;</code> | `188` |    `⭦`   | `¼` | `252` |    `𓆙`   | `ü`
 | `61`  |   `▉`     | `=` | `125`|    `♆`    | `}` | `189` |    `⭧`   | `½` | `253` |    `𓆟`   | `ý`
 | `62`  |   `▊`     | `>` | `126`|    `♇`    | `~` | `190` |    `⭨`   | `¾` | `254` |    `𓆤`   | `þ`
 | `63`  |   `▋`     | `?` | `127`|    `♔`    | `DEL` | `191` |    `⭩`   | `¿` | `255` |    `𓆣`   | `ÿ`
