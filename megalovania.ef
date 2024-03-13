@@ -1,0 +1,56 @@
+#lengths:
+#16 - ""
+#8 - " "
+#8+16 - "0"
+#4 - "?"
+#0 - ""
+
+#notes:
+#b f - 3
+#b   - 4
+#c   - 5
+#c s - 6
+#d   - 7
+#d s - 8
+#e   - 9
+#f   - :
+#f s - ;
+#g   - <
+#g s - =
+#a   - >
+#a s - ?
+#b   - @
+#b f - A
+#b   - B
+#c   - C
+#c s - D
+#d   - E
+#d s - F
+#e   - G
+#f   - H
+#f s - I
+#g   - J
+#g s - K
+#a   - L
+#a s - M
+#b   - N
+#C   - O
+#C s - P
+#D   - Q
+#D s - R
+#E   - S
+#F   - T
+#F s - U
+#G   - V
+#G s - W
+#A   - X
+#A s - Y
+#B   - Z
+#skip- 
+
+#format:
+#[note code][note length][pause length]
+#by setting pause length to 0, multiple notes can start at once
+
+w(^[^;])S2------S[w>]J[[T>>W>]J]
+@EEQ  L 0K J H  EHJCCQ  L 0K J H  CHJBBQ  L 0K J H  BHJAAQ  L 0K J H  AHJ
