@@ -42,7 +42,7 @@ powershell -Command "pkg temp.js -t win"
 for /f "delims=" %%a in ('type "tempData.txt"') do (
     set "p=%%a"
 )
-copy /y "temp.exe" %p%
+powershell -Command "Copy-Item -Path temp.exe -Destination %p%" >nul
 del /q "tempData.txt"
 del /q "temp.js"
 del /q "temp.exe"
