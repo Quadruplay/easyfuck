@@ -23,7 +23,9 @@ To begin using the Easyfuck interpreter, follow these steps:
     node easyfuck-interpreter.js
     ```
     
-    alternatively **Run the Compiler**: Execute the interpreter with Node.js:
+    alternatively 
+    
+    **Run the Compiler**: Execute the compiler with Node.js:
     ```powershell
     node easyfuck-to-js.js
     ```
