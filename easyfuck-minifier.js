@@ -166,6 +166,7 @@ async function runNew() {
             }
             codeTemp = codeTemp.split("\n").join("");
             codeTemp = codeTemp.split("\r").join("");
+            codeTemp = codeTemp.split("	").join("");
             codeTemp = codeTemp.split(" ").join("");
             code = codeTemp;
         }
