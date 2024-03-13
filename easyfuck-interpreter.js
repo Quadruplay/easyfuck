@@ -374,7 +374,7 @@ async function runNew() {
                         case "(":
                             {
                                 let functionID = code[executionPoint-1];
-                                if ( functionID == functionID.toLowerCase() && functionID != functionID.toUpperCase() && !functions[functionID]) { //check if is letter and is lowercase
+                                if ( functionID == functionID.toLowerCase() && functionID != functionID.toUpperCase()) { //check if is letter and is lowercase
                                     loopDepth = 1;
                                     functions[functionID] = "";
                                     while (loopDepth) {
@@ -643,7 +643,7 @@ async function runNew() {
                                         break;
                                 }
                                 let note = memory[pointer]&127;
-                                oscillator.frequency.setValueAtTime(440 * Math.pow(2, (note-80)/12), audioCtx.currentTime);
+                                oscillator.frequency.setValueAtTime(440 * Math.pow(2, (note-69)/12), audioCtx.currentTime);
                                 oscillator.connect(audioCtx.destination);
                                 oscillator.start();
                                 setTimeout(() => {
@@ -678,7 +678,7 @@ async function runNew() {
                                 memory[modulo(pointer-1, memory.length, false)] = Math.floor(temp/256);
                             }
                         default:
-                            functions[code[executionPoint]] && await executeCode(functions[code[executionPoint]], 0);
+                            functions[code[executionPoint]] && code[executionPoint+1] != "(" && await executeCode(functions[code[executionPoint]], 0);
                             break;
                     }
                     overflow && overflow--;

@@ -235,9 +235,7 @@ Functions in Easyfuck can only be assigned to lowercase letters, following this 
 f(++++)
 ```
 
-The code snippet above assigns the function `f` to execute the instructions `++++`. Once assigned, `f` will execute `++++` whenever invoked.
-
-Note: Functions cannot be reassigned. Running `f(++++)f(----)` will assign `++++` to `f`, execute `f`, and then execute a `----` lambda (more on lambdas later).
+The code snippet above assigns the function `f` to execute the instructions `++++`. Once assigned, `f` will execute `++++` whenever invoked. Functions can be freely reassigned.
 
 ---
 
