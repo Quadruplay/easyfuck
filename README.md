@@ -85,7 +85,8 @@ A command exists that modifies the output of `.`.
 |---------|-------------|
 | `H`     | Switches the output of `.` to use a different table. Using it again switches it back to the default |
 
-The table below provides a more detailed representation:
+<details>
+<summary>The table below provides a more detailed representation:</summary>
 
 | Value | Alt Character | Default Character | Value | Alt Character | Default Character | Value | Alt Character | Default Character | Value | Alt Character |  Default Character  |
 |-------|-----------|-|-------|-----------|-|-------|-----------|-|-------|-----------|-|
@@ -153,6 +154,7 @@ The table below provides a more detailed representation:
 | `61`  |   `▉`     | `=` | `125`|    `♆`    | `}` | `189` |    `⭧`   | `½` | `253` |    `𓆟`   | `ý`
 | `62`  |   `▊`     | `>` | `126`|    `♇`    | `~` | `190` |    `⭨`   | `¾` | `254` |    `𓆤`   | `þ`
 | `63`  |   `▋`     | `?` | `127`|    `♔`    | `DEL` | `191` |    `⭩`   | `¿` | `255` |    `𓆣`   | `ÿ`
+<details>
 
 ---
 
