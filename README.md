@@ -25,6 +25,7 @@ To begin using the Easyfuck interpreter, follow these steps:
     ```
 
 4. **Install the official syntax highlighting extension for vscode (optional)**:
+
     https://marketplace.visualstudio.com/items?itemName=Quadruplay.easyfuck-syntax
 
 Note: Easyfuck files must use the `.ef` file extension.
