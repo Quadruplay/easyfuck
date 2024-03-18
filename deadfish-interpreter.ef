@@ -1,0 +1,43 @@
+i(#increment bi-cell
+    +`(<+>)
+    #check if number is 0b00000001 00000000 (256)
+    -`(<--`(0-->0-<)++>)+
+    #check if number is 0b11111111 11111111 (-1)
+    <$>>!<$>&>0--------<[}`(>+<)]>-`(<<0<0>>>)0<0<<
+)
+d(#decrement bi-cell
+    -`(<->)
+    #check if number is 0b00000001 00000000 (256)
+    -`(<--`(0-->0-<)++>)+
+    #check if number is 0b11111111 11111111 (-1)
+    <$>>!<$>&>--------<[}`(>+<)]>-`(0<0<0<0>>>)<<<
+)
+l(#left-rotate bi-cell
+    <{>{`(<+>)
+)
+a(#add bi-cell to one to the left
+    $0<<=`(<+>)>$0<<=>
+)
+o(#print int at bi-cell, then a space
+    OS2.S
+)
+r(#copy bi-cell to the right
+    <$>>!<$>>!
+)
+s(#square bi-cell
+    r$<<M>$>Mlllllllla
+    #check if number is 0b00000001 00000000 (256)
+    -`(<--`(0-->0-<)++>)+
+)
+<>0>0>0>0>0>1---$0      #alloc memory and set storage to 13
+>,.^[^>,.^]^---.        #take input until 13 (enter on windows), then output new line
+[#main loop
+    J>>>>>>>>>>S0+S         #go past memory and set storage to 1
+    S[S>`X-``(S0S)+S]S$0J!  #go through code until nonzero encountered, take to storage and turn into zero
+    >^-`(>>>>>iJ$>)+^       #compare against i and if equal, increment
+    >^-`(>>>>dJ$>>)+^       #compare against d and if equal, decrement
+    >^-`(>>>sJ$>>>)+^       #compare against s and if equal, square
+    >^-`(>>oJ$>>>>)+^       #compare against o and if equal, output
+]
+#structure: 0[stdin]1-4[chars i d s o]5-10[3 memory bi-cells]11+[deadfish program]
+@ idso
