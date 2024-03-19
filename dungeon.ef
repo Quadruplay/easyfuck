@@ -1,0 +1,705 @@
+h(
+    J4-K        #color = 0xc0c0c0
+    4++++++++.  #H
+    6+++++.     #e
+    ----.       #a
+    7----.      #l
+    7++++.      #t
+    6++++++++.  #h
+    4------.    #:
+    2.          #
+    J0>0>S1}~+S~+:~+$J!    #copy health to 1st cell
+    (
+        -`(Rl)      #lose if hp=0
+        >3K         #set color to 0xc00000
+        <-`@        #return if hp=1
+        >3++++K     #set color to 0xc00400
+        <-`@        #return if hp=2
+        >3++++++++K #set color to 0xc00800
+        <-`@        #return if hp=3
+        >4----K     #set color to 0xc0c000
+        <-`@        #return if hp=4
+        >3----K     #set color to 0x08c000
+        <-`@        #return if hp=5
+        >2----K     #set color to 0x04c000
+        <-`@        #return if hp=6
+        >1----      #set color to 0x00c000
+        <-`@        #return if hp=7
+    )
+    HJ0>4---->$J!   #copy health to 1st cell, set 2nd to █
+    [->.<]
+    HJ1}>2>$J_      #set 1st cell to 8-health, set 2nd to [space]
+    [->.<]
+    0>2.0>'
+    J3-.1}'++++.0
+)
+p(
+    J4-K        #color = 0xc0c0c0
+    5.          #P
+    7-.         #o
+    +++++.      #t
+    7-------.   #i
+    7-.         #o
+    -.          #n
+    +++++.      #s
+    4------.    #:
+    2.          #
+    J1----K     #color = 0x00c000
+    J0>7++++++++>>$J!   #copy potions to 1st cell
+    H[->.<]H
+    >1------.<
+)
+l(R6-------.>5-.<----.2.>---.+++.++++.4+++++.2+.X)
+e(hpwacm)
+w(              #weapon
+    J4-K        #color = 0xc0c0c0
+    5+++++++.   #W
+    6+++++.     #e
+    ----.       #a
+    7.          #p
+    -.          #o
+    -.          #n
+    4------.    #:
+    2.          #
+    J0>0>>>$J!  #copy weapon to 1st cell
+    (
+        -`(     #if weapon=0 show icon for sword
+            >
+            HB----.H    #𐕣
+            <
+        )
+        +`@     #if weapon=0 return
+        -
+        -`(     #if weapon=1 show icon for lightning sword
+            >
+            4----K
+            HB++++.H    #🗲
+            4-K
+            <
+        )
+        +`@     #if weapon=1 return
+        -
+        -`(     #if weapon=2 show icon for vampire blade
+            >
+            3K
+            HA+.H    #⚸
+            4-K
+            <
+        )
+        +`@     #if weapon=2 return
+        -
+        -`(     #if weapon=3 show icon for music sword
+            >
+            3+++K
+            H9------.H    #♪
+            4-K
+            <
+        )
+        +`@     #if weapon=3 return
+        -
+        -`(     #if weapon=4 show icon for trident
+            >
+            1-K
+            H8---.H    #♪
+            4-K
+            <
+        )
+        +`@     #if weapon=4 return
+        -
+        -`(     #if weapon=5 show icon for caduceus
+            >
+            4---K
+            HA-------.H    #⚚
+            4-K
+            <
+        )
+        +`@     #if weapon=5 return
+        -
+
+        >
+        H9=-----.H  #die
+        <
+
+    )
+
+
+    J1------.0
+)
+i(              #init
+    J0>0>1}     #health = 8
+    >0++        #potions = 2
+    >0          #weapon = 0 [0: sword, 1: lightning sword, 2: vampire blade, 3: music sword, 4: trident, 5: caduceus, 6:dice]
+    >0          #turn = 0   [0: 1x4, 1: 1x6, 2: 2x5, 3: 2x6, 4: 2x8, 5: 3x6]
+)
+j(              #init turn
+    J>>>>>$>>>>>!   #copy cell 5[turn] to 10[turn]
+    >0+>0+{{        #set cell 11[enemy amount] to 1, and cell 12[enemy health] to 4
+    <<
+    (
+        -`@         #if turn = 0, return
+        >>++<<      #set cell 12 to 6
+        -`@         #if turn = 1, return
+        >+>-<<      #set cell 11 to 2, and cell 12 to 5
+        -`@         #if turn = 2, return
+        >>+<<       #set cell 12 to 6
+        -`@         #if turn = 3, return
+        >>++<<      #set cell 12 to 8
+        -`@         #if turn = 4, return
+        >+>--<<     #set cell 11 to 3, and cell 12 to 6
+    )
+    >>$<            #copy cell 12 to storage, goto cell 11
+    (
+        -
+        <<<<<!>>>>> #set monster 1 to storage
+        -`@         #if cell 11 = 1, return
+        <<<<!>>>>   #set monster 2 to storage
+        -`@         #if cell 11 = 2, return
+        <<<!>>>
+    )
+)
+r(              #render 1 monster
+    5+++.       #S
+    7----.      #l
+    ---.        #i
+    ++++.       #m
+    6+++++.     #e
+    2.          # 
+    >.<         #A/B/C
+    4------.    #:
+    2.          # 
+    !'          #num
+    6++++++++.  #h
+    7.          #p
+    1------.    #EOL
+)
+a(              #fight choice
+    J0>0<
+    4+++.       #C
+    +++++.      #H
+    5-.         #O
+    .           #O
+    ++++.       #S
+    4+++++.     #E
+    4------.    #:
+    1------.    #EOL
+    >4>>>>>$
+    J>+<!
+    [
+        6-----.     #[
+        >.<         #A
+        6---.       #]
+        2.          # 
+        4+.         #A
+        7++++.      #t
+        .           #t
+        6+.         #a
+        ++.         #c
+        7-----.     #k
+        2.
+        r
+        ;
+    ]
+    >>>>>>>$
+    J>+<!
+    [
+        6-----.     #[
+        >.<         #B
+        6---.       #]
+        2.          # 
+        4+.         #A
+        7++++.      #t
+        .           #t
+        6+.         #a
+        ++.         #c
+        7-----.     #k
+        2.
+        r
+        ;
+    ]
+    >>>>>>>>$
+    J>+<!
+    [
+        6-----.     #[
+        >.<         #C
+        6---.       #]
+        2.          # 
+        4+.         #A
+        7++++.      #t
+        .           #t
+        6+.         #a
+        ++.         #c
+        7-----.     #k
+        2.
+        r
+        ;
+    ]
+    >>>$
+    J>+<!
+    [
+        6-----.     #[
+        >.<         #D
+        6---.       #]
+        2.          # 
+        >.<         #D
+        7++.        #r
+        7-------.   #i
+        7--.        #n
+        ---.        #k
+        2.          # 
+        6+.         #a
+        2.          # 
+        7.          #p
+        -.          #o
+        +++++.      #t
+        7-------.   #i
+        7-.         #o
+        -.          #n
+        ;
+    ]
+)
+c(              #choice input
+    J>>>>>>>>>0+#goto input cell, and set it to 1
+    [
+        >4<,    #set cell 10 (key) to 64, and ask for input into the input cell
+        >+$<^   #check against 65 (A)
+        -`(
+            <<<
+            [   #if enemy A alive
+                -           #deal damage
+                >>>0^-      #set input cell to a value that will escape the loop after decoding
+                <<<<<
+                $           #take weapon to storage
+                >>>>>>>
+                !           #put storage in cell 11
+                (
+                    -`@
+                    >0++$?%<#generate 50% in cell 12
+                    -`(
+                        <<<<<--     #deal damage
+                        +`+-        #set to 0 if -1 (255)
+                        ++`(++)--   #set to 0 if -2 (254)
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        >[
+                            <<<<<<<<<<+++#heal
+                            >>>>>>>>>>  #go back
+                        ;]<@
+                    )
+                    +`@-
+                    -`(
+                        >?>3}<T<
+                    )
+                    +`@-
+                    -`(
+                        <<<[-;]<[-;]<[-;]
+                        >>>>>
+                    )
+                    +`@-
+                    -`(
+                        <<<<<<<<$   #copy amount of potions
+                        >>>         #goto enemy 1
+                        S[-S        #for every potion, deal damage
+                            [-;]
+                        S]S
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        <<<<<       #deal damage
+                        <<S0++++++S #put 6 in storage
+                        ?%=         #roll
+                        >>
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        <<<<<       #deal damage
+                        [-;]
+                        <<S0++++++S #put 6 in storage
+                        ?%=         #roll
+                        >>
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        <<<<<       #deal damage
+                        [-;][-;]
+                        <<S0++++++S #put 6 in storage
+                        ?%=         #roll
+                        >>
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        <<<<<       #deal damage
+                        [-;][-;][-;]
+                        <<S0++++++S #put 6 in storage
+                        ?%=         #roll
+                        >>
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        <<<<<       #deal damage
+                        [-;][-;][-;][-;]
+                        <<S0++++++S #put 6 in storage
+                        ?%=         #roll
+                        >>
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        <<<<<       #deal damage
+                        [-;][-;][-;][-;][-;]
+                        <<S0++++++S #put 6 in storage
+                        ?%=         #roll
+                        >>
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+                )
+                <<<<<
+            ;]
+            >>>
+        )
+        +>$<^
+        >+$<^   #check against 66 (B)
+        -`(
+            <<
+            [   #if enemy B alive
+                -           #deal damage
+                >>0^-       #set input cell to a value that will escape the loop after decoding
+                <<<<<
+                $           #take weapon to storage
+                >>>>>>>
+                !           #put storage in cell 11
+                (
+                    -`@
+                    >0++$?%<#generate 50% in cell 12
+                    -`(
+                        <<<<--      #deal damage
+                        +`+-        #set to 0 if -1 (255)
+                        ++`(++)--   #set to 0 if -2 (254)
+                        >>>>        #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        >[
+                            <<<<<<<<<<+++#heal
+                            >>>>>>>>>>  #go back
+                        ;]<@
+                    )
+                    +`@-
+                    -`(
+                        >?>3}<T<
+                    )
+                    +`@-
+                    -`(
+                        <<<[-;]<[-;]<[-;]
+                        >>>>>
+                    )
+                    +`@-
+                    -`(
+                        <<<<<<<<$   #copy amount of potions
+                        >>>>        #goto enemy 2
+                        S[-S        #for every potion, deal damage
+                            [-;]
+                        S]S
+                        >>>>        #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        <<<<       #deal damage
+                        <<<S0++++++S #put 6 in storage
+                        ?%=         #roll
+                        >>
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        <<<<       #deal damage
+                        [-;]
+                        <<<S0++++++S #put 6 in storage
+                        ?%=         #roll
+                        >>
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        <<<<       #deal damage
+                        [-;][-;]
+                        <<<S0++++++S #put 6 in storage
+                        ?%=         #roll
+                        >>
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        <<<<       #deal damage
+                        [-;][-;][-;]
+                        <<<S0++++++S #put 6 in storage
+                        ?%=         #roll
+                        >>
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        <<<<       #deal damage
+                        [-;][-;][-;][-;]
+                        <<<S0++++++S #put 6 in storage
+                        ?%=         #roll
+                        >>
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        <<<<       #deal damage
+                        [-;][-;][-;][-;][-;]
+                        <<<S0++++++S #put 6 in storage
+                        ?%=         #roll
+                        >>
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+
+                )
+                <<<<
+            ;]
+            >>
+        )
+        +>$<^
+        >+$<^   #check against 67 (C)
+        -`(
+            <
+            [   #if enemy C alive
+                -           #deal damage
+                >0^-        #set input cell to a value that will escape the loop after decoding
+                <<<<<
+                $           #take weapon to storage
+                >>>>>>>
+                !           #put storage in cell 11
+                (
+                    -`@
+                    >0++$?%<#generate 50% in cell 12
+                    -`(
+                        <<<--       #deal damage
+                        +`+-        #set to 0 if -1 (255)
+                        ++`(++)--   #set to 0 if -2 (254)
+                        >>>         #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        >[
+                            <<<<<<<<<<+++#heal
+                            >>>>>>>>>>  #go back
+                        ;]<@
+                    )
+                    +`@-
+                    -`(
+                        >?>3}<T<
+                    )
+                    +`@-
+                    -`(
+                        <<<[-;]<[-;]<[-;]
+                        >>>>>
+                    )
+                    +`@-
+                    -`(
+                        <<<<<<<<$   #copy amount of potions
+                        >>>>>       #goto enemy 3
+                        S[-S        #for every potion, deal damage
+                            [-;]
+                        S]S
+                        >>>         #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        <<<       #deal damage
+                        <<<<S0++++++S #put 6 in storage
+                        ?%=         #roll
+                        >>
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        <<<       #deal damage
+                        [-;]
+                        <<<<S0++++++S #put 6 in storage
+                        ?%=         #roll
+                        >>
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        <<<       #deal damage
+                        [-;][-;]
+                        <<<<S0++++++S #put 6 in storage
+                        ?%=         #roll
+                        >>
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        <<<       #deal damage
+                        [-;][-;][-;]
+                        <<<<S0++++++S #put 6 in storage
+                        ?%=         #roll
+                        >>
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        <<<       #deal damage
+                        [-;][-;][-;][-;]
+                        <<<<S0++++++S #put 6 in storage
+                        ?%=         #roll
+                        >>
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+                    -`(
+                        <<<       #deal damage
+                        [-;][-;][-;][-;][-;]
+                        <<<<S0++++++S #put 6 in storage
+                        ?%=         #roll
+                        >>
+                        >>>>>       #go back
+                        @
+                    )
+                    +`@-
+                )
+                <<<
+            ;]
+            >
+        )
+        +>$<^
+        >+$<^   #check against 68 (D)
+        -`(
+            <<<<<<
+            [   #if enemy potions
+                -           #take potion
+                >>>>>>0^-   #set input cell to a value that will escape the loop after decoding
+                <<<<<<
+                <++++>
+            ;]
+            >>>>>>
+        )
+        +>$<^
+    ]
+)
+m(              #deal damage from monsters
+    J>>>>>>[<<<<->>>>;]
+    <<<<-`l+>>>>
+    >[<<<<<->>>>>;]
+    <<<<<-`l+>>>>>
+    >[<<<<<<->>>>>>;]
+    <<<<<<-`l+>>>>>>
+)
+s(R6-------.>5-.<----.>2.<++.5-------.+++++.2+.X)
+b(              #reward
+    J0>0<
+    4+++.       #C
+    +++++.      #H
+    5-.         #O
+    .           #O
+    ++++.       #S
+    4+++++.     #E
+    4------.    #:
+    1------.    #EOL
+    6-----.     #[
+    4+.         #A
+    6---.       #]
+    2.          # 
+    5.          #P
+    -.          #O
+    +++++.      #T
+    5-------.   #I
+    5-.         #O
+    -.          #N
+    1------.    #EOL
+    6-----.     #[
+    4++.        #B
+    6---.       #]
+    2.          # 
+    5++.        #R
+    4+.         #A
+    5--.        #N
+    4++++.      #D
+    5-.         #O
+    --.         #M
+    2.          # 
+    5+++++++.   #W
+    4+++++.     #E
+    4+.         #A
+    5.          #P
+    -.          #O
+    -.          #N
+    1------.
+    J>>>>>>>>>0+#goto input cell, and set it to 1
+    [
+        >4<,
+        >+$<^
+        -`(
+            0^-
+            <<<<<<++>>>>>>
+        )
+        +`;>$<^
+        >+$<^
+        -`(
+            0^-
+            <<<<<1}-$?%>>>>>
+        )
+        +`;>$<^
+    ]
+)
+#structure:
+#0-1[rendering]
+#2[health]
+#3[potions]
+#4[weapon]
+#5[turn]
+#6[enemy 1]
+#7[enemy 2]
+#8[enemy 3]
+#9[input]
+#10+[calculations]
+ij
+J>>[
+ReJ>>>>>>
+S0=S>S=S>S=S>>!-`(<<<<<------`s+++++++jRb)
+J>>]
+Re
+
+#110000   3
+#110100   3++++
+#111000   3++++++++
+#111100   4----
+#101100   3----
+#011100   2----
+#001100   1----
+@ 
