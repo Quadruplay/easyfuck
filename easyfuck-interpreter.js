@@ -630,20 +630,20 @@ async function runNew() {
                                 const oscillator = audioCtx.createOscillator();
                                 switch (Math.sign(memory[pointer]&128)+Math.sign(memory[pointer]&64)) {
                                     case 0:
-                                        oscillator.type = "square";
+                                        oscillator.type = "sine";
                                         break;
                                     case 1:
                                         oscillator.type = "square";
                                         break;
                                     case 2:
-                                        oscillator.type = "square";
+                                        oscillator.type = "sawtooth";
                                         break;
                                     case 3:
-                                        oscillator.type = "square";
+                                        oscillator.type = "triangle";
                                         break;
                                 }
-                                let note = memory[pointer]&127;
-                                oscillator.frequency.setValueAtTime(440 * Math.pow(2, (note-69)/12), audioCtx.currentTime);
+                                let note = memory[pointer]&63;
+                                oscillator.frequency.setValueAtTime(440 * Math.pow(2, (note-33)/12), audioCtx.currentTime);
                                 oscillator.connect(audioCtx.destination);
                                 oscillator.start();
                                 setTimeout(() => {
@@ -717,6 +717,7 @@ async function runNew() {
                             loopDepth = 0;
                             functions = {};
                             state = 1;
+                            moddedAsciis = false;
                             console.clear();
                             run();
                             r();
