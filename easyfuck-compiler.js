@@ -466,8 +466,8 @@ async function runNew() {
                     appendLine("oscillator.type = 'triangle';");
                     appendLine("break;");
                     appendLine("}");
-                    appendLine("let note = memory[index]%127;");
-                    appendLine("oscillator.frequency.setValueAtTime(440 * Math.pow(2, (note-69)/12), audioCtx.currentTime);");
+                    appendLine("let note = memory[index]%63;");
+                    appendLine("oscillator.frequency.setValueAtTime(440 * Math.pow(2, (note-33)/12), audioCtx.currentTime);");
                     appendLine("oscillator.connect(audioCtx.destination);");
                     appendLine("oscillator.start();");
                     appendLine("setTimeout(() => {");
