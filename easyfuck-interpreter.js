@@ -171,6 +171,7 @@ async function runNew() {
         let loopDepth = 0;
         let functions = {};
         let state = 1;
+        moddedAsciis = false;
         async function executeCode(code, executionPoint, debug) {
             if (debug) console.log(memory);
             return new Promise(async (r) => {
