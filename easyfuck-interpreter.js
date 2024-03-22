@@ -289,7 +289,7 @@ async function runNew() {
                             memory[pointer] = modulo(memory[pointer]*storage, 256);
                             break;
                         case "/":
-                            memory[pointer] = Math.floor(memory[pointer]/storage);
+                            memory[pointer] = Math.floor(memory[pointer]/(storage || 256));
                             break;
                         case "=":
                             memory[pointer] = modulo(memory[pointer]+storage, 256);
@@ -552,8 +552,8 @@ async function runNew() {
                             })
                             break;
                         case 'N':
-                            memory[pointer] = modulo(Math.floor((memory[modulo(pointer-1, memory.length, false)]*256 + memory[pointer])/storage), 256, false);
-                            memory[modulo(pointer-1, memory.length, false)] = Math.floor(memory[modulo(pointer-1, memory.length, false)]/storage);
+                            memory[pointer] = modulo(Math.floor((memory[modulo(pointer-1, memory.length, false)]*256 + memory[pointer])/(storage || 256)), 256, false);
+                            memory[modulo(pointer-1, memory.length, false)] = Math.floor(memory[modulo(pointer-1, memory.length, false)]/(storage || 256));
                             break;
                         case 'S':
                             {
