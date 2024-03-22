@@ -352,6 +352,7 @@ async function runNew() {
                             executionPoint++;
                             while (!["#","\n","\r"].includes(code[executionPoint])) {
                                 executionPoint++;
+                                if (executionPoint > code.length) break;
                             }
                             break;
                         case "?":
