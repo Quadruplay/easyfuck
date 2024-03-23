@@ -124,7 +124,7 @@ async function runNew() {
             while (codeArr.length) {
                 let first = codeArr.shift()
                 if (inComment) {
-                    if (["#","\n","\r"].includes(first)) {
+                    if (["\n","\r"].includes(first)) {
                         inComment = false;
                     }
                 } else {

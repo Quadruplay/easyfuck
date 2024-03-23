@@ -28,6 +28,8 @@ To begin using the Easyfuck interpreter, follow these steps:
 
     https://marketplace.visualstudio.com/items?itemName=Quadruplay.easyfuck-syntax
 
+    
+
 Note: Easyfuck files must use the `.ef` file extension.
 
 ---
@@ -251,7 +253,7 @@ Before discussing control flow commands, let's address miscellaneous commands:
 
 | Command | Description |
 |---------|-------------|
-| `#`     | Initiates a comment that ends with another `#` or a new line |
+| `#`     | Initiates a comment that ends on a new line |
 | `W`     | Suspends program execution for a duration specified by the value of the cell at the pointer, multiplied by 10 milliseconds |
 | `Z`     | Sets the value of the bi-cell at the pointer to the number of seconds elapsed since the start of the program |
 | `?`     | Assigns a random value between 0 and 255 to the cell at the pointer |
