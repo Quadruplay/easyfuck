@@ -28,7 +28,7 @@ if errorlevel 2 (
 exit
 
 :run
-powershell -Command "node easyfuck-interpreter.js"
+powershell -Command "node easyfuck-interpreter.js" || pause
 exit /b
 
 :minify

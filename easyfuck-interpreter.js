@@ -140,7 +140,7 @@ async function runNew() {
         await requestPath();
         let fileData = loadedData.split("@")
         let memory = [0];
-        let initData = fileData.length > 1 ? fileData.at(-1) : undefined;
+        let initData = fileData.length > 1 ? fileData.pop() : undefined;
         if (initData) memory = [...initData].map((e) => e.charCodeAt(0)%256);
         let code = ""
         while (fileData.length) {
@@ -172,8 +172,8 @@ async function runNew() {
         let functions = {};
         let state = 1;
         moddedAsciis = false;
-        async function executeCode(code, executionPoint, debug) {
-            if (debug) console.log(memory);
+        async function executeCode(code, executionPoint, debug=false) {
+            if (debug) console.log(code);
             return new Promise(async (r) => {
                 loop: while (code.length && executionPoint < code.length && state) {
                     switch (code[executionPoint]) {
@@ -217,7 +217,7 @@ async function runNew() {
                                     else if (code[executionPoint] == "]") loopDepth--;
                                     if (executionPoint > code.length) {
                                         console.error("Unmatched square brackets");
-                                        process.exit();
+                                        process.exit(1);
                                     }
                                 }
                             }
@@ -231,7 +231,7 @@ async function runNew() {
                                     else if (code[executionPoint] == "]") loopDepth++;
                                     if (executionPoint < 0) {
                                         console.error("Unmatched square brackets");
-                                        process.exit();
+                                        process.exit(1);
                                     }
                                 }
                             }
@@ -386,7 +386,7 @@ async function runNew() {
                                         if (loopDepth) functions[functionID]+= code[executionPoint];
                                         if (executionPoint > code.length) {
                                             console.error("Unmatched parentheses");
-                                            process.exit();
+                                            process.exit(1);
                                         }
                                     }
                                 } else {
@@ -399,7 +399,7 @@ async function runNew() {
                                         if (loopDepth) lambda+= code[executionPoint];
                                         if (executionPoint > code.length) {
                                             console.error("Unmatched parentheses");
-                                            process.exit();
+                                            process.exit(1);
                                         
                                         }
                                     }
