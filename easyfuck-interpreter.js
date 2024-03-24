@@ -691,9 +691,7 @@ async function runNew() {
         }
         async function end() {
             process.stdout.write('\x1b[0m');
-            console.log(String.fromCharCode(10));
-            console.log(String.fromCharCode(10));
-            console.log(String.fromCharCode(10));
+            process.stdout.write('\x1b['+String(process.stdout.rows-4)+';0H');
             console.log("Execution time:", Date.now()-startTime, "ms");
             console.log("[0] Exit");
             console.log("[1] Run again");
