@@ -414,25 +414,3 @@ l(
 #initializer data:
 @Primes:
 ```
-#### D6 roller:
-```
-#Array structure:
-#cell           number of dice
-#cell           6 (faces)
-#cell           145 (die character)
-#cell           random
-#bi-cell        sum
-
-[.0>]J              #print and reset initialized data
->1------.<          #print new line
-"'>.0++++++>9+H     #put user input into cell 0, put 6 into cell 1 and storage, put 145 into cell 2, switch to game typeset
-a(=`(<+>))          #define function a that adds storage to bi-cell at pointer
-J[
-    ->$>>?%$        #decrement cell 0 and generate random number 0-5
-    <=._>+$>>       #print the correct die and increase random variable to 1-6
-    a               #add rolled value to total sum
-J]
-1------H.           #print new line
->>>>>O              #print total sum
-@Give number of dice:
-```
