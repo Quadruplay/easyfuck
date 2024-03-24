@@ -25,6 +25,7 @@ if errorlevel 2 (
     call :run
     goto :main
 )
+cls
 exit
 
 :run
