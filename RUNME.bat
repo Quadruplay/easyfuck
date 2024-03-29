@@ -9,7 +9,19 @@ echo [0] Exit
 echo [1] Run
 echo [2] Minify
 echo [3] Compile
-choice /c 0123 /n /m "Choose an option: "
+echo [4] Compress
+echo [5] Decompress
+choice /c 012345 /n /m "Choose an option: "
+if errorlevel 6 (
+    cls
+    call :decompress
+    goto :main
+)
+if errorlevel 5 (
+    cls
+    call :compress
+    goto :main
+)
 if errorlevel 4 (
     cls
     call :compile
@@ -47,5 +59,15 @@ powershell -Command "Copy-Item -Path temp.exe -Destination %p%" >nul
 del /q "tempData.txt"
 del /q "temp.js"
 del /q "temp.exe"
+pause
+exit /b
+
+:compress
+powershell -Command "node easyfuck-compressor.js"
+pause
+exit /b
+
+:decompress
+powershell -Command "node easyfuck-decompressor.js"
 pause
 exit /b

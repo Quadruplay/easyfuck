@@ -127,7 +127,7 @@ async function runNew() {
                         re();
                     })
                 });
-                fs.readFile(path, 'utf8', (err, data) => {
+                fs.readFile(path, path.includes(".ef7") ? 'latin1' : 'utf8', (err, data) => {
                     if (err) {
                         console.error(err);
                         reject();
@@ -138,6 +138,31 @@ async function runNew() {
             })
         }
         await requestPath();
+        if (path.includes(".ef7")) {
+            let cCode = loadedData.split("");
+            let code = "";
+            let bits = "";
+            while (cCode.length) {
+                // Convert ASCII character to binary string
+                let binary = cCode.shift().charCodeAt(0).toString(2);
+
+                // Pad the binary string to ensure it's 8 bits long
+                while (binary.length < 8) {
+                    binary = "0" + binary;
+                }
+                
+                // Convert binary string back to ASCII character and add to output
+                bits += binary;
+            }
+            while (bits.length % 7 != 0) {
+                bits = bits.slice(0,-1);
+            }
+            for (let i = 0; i < bits.length; i += 7) {
+                let byte = "0"+bits.slice(i, i + 7);
+                code += String.fromCharCode(parseInt(byte, 2));
+            }
+            loadedData = code;
+        }
         let fileData = loadedData.split("@")
         let memory = [0];
         let initData = fileData.length > 1 ? fileData.pop() : undefined;
@@ -153,7 +178,7 @@ async function runNew() {
             while (codeArr.length) {
                 let first = codeArr.shift()
                 if (inComment) {
-                    if (["#","\n","\r"].includes(first)) {
+                    if (["\n","\r"].includes(first)) {
                         inComment = false;
                     }
                 } else {
@@ -685,6 +710,7 @@ async function runNew() {
                     }
                     overflow && overflow--;
                     executionPoint++;
+                    if (state == 0) break loop;
                 }
                 r();
             });
