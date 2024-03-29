@@ -125,7 +125,7 @@ async function runNew() {
             bits += binary;
         }
         while (bits.length % 7 != 0) {
-            bits = bits.slice(0,-1);
+            bits = bits.slice(0, -1);
         }
         for (let i = 0; i < bits.length; i += 7) {
             let byte = "0"+bits.slice(i, i + 7);

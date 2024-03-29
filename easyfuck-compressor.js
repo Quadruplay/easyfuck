@@ -110,13 +110,15 @@ async function runNew() {
         }
         await requestPath();
         let fileData = loadedData.split("@")
-        let memory = [0];
+        let memory = [];
         let initData = fileData.length > 1 ? fileData.pop() : undefined;
         if (initData) memory = [...initData].map((e) => e.charCodeAt(0)%256);
         let code = ""
-        while (fileData.length) {
-            code += fileData.shift()+"@"
-        }
+        if (memory != []) {
+            while (fileData.length) {
+                code += fileData.shift()+"@"
+            }
+        } else code = fileData[0];
         {
             let codeArr = code.split("");
             let codeTemp = ""
@@ -141,9 +143,7 @@ async function runNew() {
             codeTemp = codeTemp.split(" ").join("");
             code = codeTemp;
         }
-        if (memory != [0]) {
-            code += memory.map((e) => String.fromCharCode(e)).join("");
-        }
+        code += memory.map((e) => String.fromCharCode(e)).join("");
         let cCode = "";
         let bits = "";
         code = code.split("");
@@ -163,13 +163,17 @@ async function runNew() {
         while (bits.length % 8 != 0) {
             bits += "0";
         }
+        // check if last byte is empty
+        // if (bits.slice(-8) == "00000000") {
+        //     bits = bits.slice(0, -8);
+        // }
         for (let i = 0; i < bits.length; i += 8) {
             let byte = bits.slice(i, i + 8);
             cCode += String.fromCharCode(parseInt(byte, 2));
         }
-        console.log(cCode);
         async function save() {
             return new Promise((res, rej) => {
+                console.log(process.stdout.encoding);
                 fs.writeFile(path.replace(".ef",".ef7"), cCode, "latin1", (err) => {
                     if (err) {
                         console.error(err);
