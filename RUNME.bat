@@ -8,7 +8,7 @@ echo What would you like to do?
 echo [0] Exit
 echo [1] Run
 echo [2] Minify
-echo [3] Compile
+echo [3] Compile (broken)
 echo [4] Compress
 echo [5] Decompress
 choice /c 012345 /n /m "Choose an option: "
