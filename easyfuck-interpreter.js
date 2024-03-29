@@ -154,8 +154,9 @@ async function runNew() {
                 // Convert binary string back to ASCII character and add to output
                 bits += binary;
             }
+            if (bits.length % 7 == 1 && bits.slice(-15) == "000000011111111") bits = bits.slice(0, -15);
             while (bits.length % 7 != 0) {
-                bits = bits.slice(0,-1);
+                bits = bits.slice(0, -1);
             }
             for (let i = 0; i < bits.length; i += 7) {
                 let byte = "0"+bits.slice(i, i + 7);
@@ -717,7 +718,8 @@ async function runNew() {
         }
         async function end() {
             process.stdout.write('\x1b[0m');
-            process.stdout.write('\x1b['+String(process.stdout.rows-4)+';0H');
+            process.stdout.write('\x1b['+process.stdout.rows+';0H');
+            process.stdout.write('\n'.repeat(2));
             console.log("Execution time:", Date.now()-startTime, "ms");
             console.log("[0] Exit");
             console.log("[1] Run again");

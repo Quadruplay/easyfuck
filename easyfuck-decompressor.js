@@ -124,6 +124,7 @@ async function runNew() {
             // Convert binary string back to ASCII character and add to output
             bits += binary;
         }
+        if (bits.length % 7 == 1 && bits.slice(-15) == "000000011111111") bits = bits.slice(0, -15);
         while (bits.length % 7 != 0) {
             bits = bits.slice(0, -1);
         }
