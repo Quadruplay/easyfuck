@@ -189,44 +189,37 @@ async function runNew() {
             }
             let initData = memIndex ? fileData.splice(memIndex+1) : undefined;
             if (initData) memory = [...initData].map((e) => e.charCodeAt(0)%256);
-            for (let i = 0; i < fileData.length; i++) {
-                code += fileData[i];
-            }
+            code = fileData.join("");
         }
-        // let initData = fileData.length > 1 ? fileData.pop() : undefined;
-        // if (initData) memory = [...initData].map((e) => e.charCodeAt(0)%256);
-        // let code = ""
-        // while (fileData.length) {
-        //     code += fileData.shift()+"@"
-        // }
-        // {
-        //     let codeArr = code.split("");
-        //     let codeTemp = ""
-        //     let inComment = false;
-        //     while (codeArr.length) {
-        //         let first = codeArr.shift()
-        //         if (inComment) {
-        //             if (["\n","\r"].includes(first)) {
-        //                 inComment = false;
-        //             }
-        //         } else {
-        //             if (first == "#") {
-        //                 inComment = true;
-        //             } else {
-        //                 codeTemp += first;
-        //             }
-        //         }
-        //     }
-        //     code = codeTemp;
-        // }
+        {
+            let codeArr = code.split("");
+            let codeTemp = ""
+            let inComment = false;
+            while (codeArr.length) {
+                let first = codeArr.shift()
+                if (inComment) {
+                    if (["\n"].includes(first)) {
+                        inComment = false;
+                    }
+                } else {
+                    if (first == "#") {
+                        inComment = true;
+                    } else {
+                        codeTemp += first;
+                    }
+                }
+            }
+            code = codeTemp;
+        }
         let storage = 0;
         let pointer = 0;
         let loopDepth = 0;
         let functions = {};
         let state = 1;
         moddedAsciis = false;
+        let constMemory = [...memory];
         async function executeCode(code, executionPoint, debug=false) {
-            if (debug) console.log(code);
+            // console.log(code, memory)
             return new Promise(async (r) => {
                 loop: while (code.length && executionPoint < code.length && state) {
                     switch (code[executionPoint]) {
@@ -759,14 +752,7 @@ async function runNew() {
                             process.exit();
                         case "1":
                             process.stdin.removeAllListeners('data');
-                            fileData = loadedData.split("@")
-                            memory = [0];
-                            initData = fileData.length > 1 ? fileData.at(-1) : undefined;
-                            if (initData) memory = [...initData].map((e) => e.charCodeAt(0)%256);
-                            code = ""
-                            while (fileData.length) {
-                                code += fileData.shift()+"@"
-                            }
+                            memory = [...constMemory];
                             storage = 0;
                             pointer = 0;
                             loopDepth = 0;
