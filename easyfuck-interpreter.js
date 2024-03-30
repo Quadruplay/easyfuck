@@ -164,34 +164,61 @@ async function runNew() {
             }
             loadedData = code;
         }
-        let fileData = loadedData.split("@")
+        let fileData = loadedData.split("");
         let memory = [0];
-        let initData = fileData.length > 1 ? fileData.pop() : undefined;
-        if (initData) memory = [...initData].map((e) => e.charCodeAt(0)%256);
-        let code = ""
-        while (fileData.length) {
-            code += fileData.shift()+"@"
-        }
+        let code = "";
         {
-            let codeArr = code.split("");
-            let codeTemp = ""
+            let memIndex = undefined;
             let inComment = false;
-            while (codeArr.length) {
-                let first = codeArr.shift()
+            for (let i = 0; i < fileData.length; i++) {
                 if (inComment) {
-                    if (["\n","\r"].includes(first)) {
+                    if (["\n","\r"].includes(fileData[i])) {
                         inComment = false;
                     }
                 } else {
-                    if (first == "#") {
-                        inComment = true;
-                    } else {
-                        codeTemp += first;
+                    switch (fileData[i]) {
+                        case "#":
+                            inComment = true;
+                            break;
+                        case "@":
+                            if (!inComment) 
+                                memIndex = i;
+                            break;
                     }
                 }
             }
-            code = codeTemp;
+            let initData = memIndex ? fileData.splice(memIndex+1) : undefined;
+            if (initData) memory = [...initData].map((e) => e.charCodeAt(0)%256);
+            for (let i = 0; i < fileData.length; i++) {
+                code += fileData[i];
+            }
         }
+        // let initData = fileData.length > 1 ? fileData.pop() : undefined;
+        // if (initData) memory = [...initData].map((e) => e.charCodeAt(0)%256);
+        // let code = ""
+        // while (fileData.length) {
+        //     code += fileData.shift()+"@"
+        // }
+        // {
+        //     let codeArr = code.split("");
+        //     let codeTemp = ""
+        //     let inComment = false;
+        //     while (codeArr.length) {
+        //         let first = codeArr.shift()
+        //         if (inComment) {
+        //             if (["\n","\r"].includes(first)) {
+        //                 inComment = false;
+        //             }
+        //         } else {
+        //             if (first == "#") {
+        //                 inComment = true;
+        //             } else {
+        //                 codeTemp += first;
+        //             }
+        //         }
+        //     }
+        //     code = codeTemp;
+        // }
         let storage = 0;
         let pointer = 0;
         let loopDepth = 0;
